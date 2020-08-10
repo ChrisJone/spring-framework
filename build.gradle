@@ -277,8 +277,10 @@ configure(allprojects) { project ->
 			cacheChangingModulesFor 0, "seconds"
 		}
 		repositories {
-			mavenCentral()
-			maven { url "https://repo.spring.io/libs-spring-framework-build" }
+			//mavenCentral()
+			//maven { url "https://repo.spring.io/libs-spring-framework-build" }
+			maven { url 'https://maven.aliyun.com/repository/central' }
+			maven { url 'https://maven.aliyun.com/repository/spring' }
 		}
 	}
 	configurations.all {
@@ -286,6 +288,15 @@ configure(allprojects) { project ->
 			cacheChangingModulesFor 0, "seconds"
 			cacheDynamicVersionsFor 0, "seconds"
 		}
+	}
+}
+allprojects {
+	repositories {
+		maven { url 'https://maven.aliyun.com/repository/public/' }
+		maven { url 'https://maven.aliyun.com/repository/spring/' }
+		mavenLocal()
+		mavenCentral()
+
 	}
 }
 
