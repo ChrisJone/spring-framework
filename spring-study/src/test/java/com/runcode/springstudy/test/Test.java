@@ -1,7 +1,6 @@
 package com.runcode.springstudy.test;
 
 import com.runcode.springstudy.AppConfig;
-import com.runcode.springstudy.components.A;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Test {
@@ -11,6 +10,6 @@ public class Test {
 		//context.setAllowCircularReferences(false);
 		context.register(AppConfig.class);
 		context.refresh();
-		System.out.println(context.getBean(AppConfig.class));
+		//System.out.println(context.getBean("message"));
 	}
 }
