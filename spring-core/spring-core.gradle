@@ -20,10 +20,13 @@ configurations {
 	coroutines
 }
 
+// 这里使用了shadowJar来打包jar包，其中jar包之中包含依赖项的内容引用进来
+// 官方文档：https://imperceptiblethoughts.com/shadow/
 task cglibRepackJar(type: ShadowJar) {
 	baseName = 'spring-cglib-repack'
 	version = cglibVersion
 	configurations = [project.configurations.cglib]
+	//将A包下的所有子包和子类移动到B包下面，比如net.sf.cglib 下的所有项目移动到org.springframework.cglib包中
 	relocate 'net.sf.cglib', 'org.springframework.cglib'
 	relocate 'org.objectweb.asm', 'org.springframework.asm'
 }
@@ -37,6 +40,8 @@ task objenesisRepackJar(type: ShadowJar) {
 
 dependencies {
 	cglib("cglib:cglib:${cglibVersion}@jar")
+	//objenesis --> To instantiate a new object of a particular class
+	//官网：http://objenesis.org/tutorial.html https://github.com/easymock/objenesis
 	objenesis("org.objenesis:objenesis:${objenesisVersion}@jar")
 	coroutines(project(path: ":kotlin-coroutines", configuration: 'classesOnlyElements'))
 	compile(files(cglibRepackJar))

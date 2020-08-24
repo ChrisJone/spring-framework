@@ -4,13 +4,14 @@
 	   xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+	<import resource="beans.xml"/>
 
-	<bean name="messageService" class="com.runcode.springstudy.service.impl.MessageServiceImpl">
+	<!--<bean name="messageService" class="com.runcode.springstudy.service.impl.MessageServiceImpl">
 
 	</bean>
 
 	<bean id="fbMessageService" class="com.runcode.springstudy.factorybean.MyFactoryBean">
 		<property name="interfaceName" value="com.runcode.springstudy.service.MessageService"/>
 		<property name="target" ref="messageService"/>
-	</bean>
+	</bean>-->
 </beans>
