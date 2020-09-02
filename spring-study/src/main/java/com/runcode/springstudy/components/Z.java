@@ -4,20 +4,27 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.core.annotation.Order;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-@Component
-public class A implements ApplicationContextAware {
-	@Autowired
-	B b;
+import javax.annotation.PostConstruct;
 
-	public A() {
-		System.out.println("create A");
+//@Component
+public class Z /*implements ApplicationContextAware*/ {
+	/*@Autowired
+	X x;
+
+	public Z(){
+		System.out.println("Z created");
+	}
+
+	@PostConstruct
+	public void zinit(){
+		System.out.println("call z lifecycle init callback");
 	}
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		System.out.println("init applicationContext");
-	}
+		System.out.println("call aware callback");
+	}*/
 }

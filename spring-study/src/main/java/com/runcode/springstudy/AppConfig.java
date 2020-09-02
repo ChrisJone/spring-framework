@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 @Configuration
-@ComponentScan(basePackages ={"com.runcode.springstudy"} )
+@ComponentScan(basePackages ={"com.runcode.springstudy.components"} )
 public class AppConfig {
 
 
