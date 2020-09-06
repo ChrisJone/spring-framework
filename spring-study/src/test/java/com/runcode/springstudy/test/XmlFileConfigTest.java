@@ -1,5 +1,6 @@
 package com.runcode.springstudy.test;
 
+import com.runcode.springstudy.context.MyApplicationContext;
 import com.runcode.springstudy.factorybean.MyFactoryBean;
 import com.runcode.springstudy.instantiation.ClientService;
 import com.runcode.springstudy.service.MessageService;
@@ -9,7 +10,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 public class XmlFileConfigTest {
 
 	public static void main(String[] args) throws Exception {
-		FileSystemXmlApplicationContext ctx = new FileSystemXmlApplicationContext("classpath:spring/application.xml");
+		FileSystemXmlApplicationContext ctx = new MyApplicationContext("classpath:spring/application.xml");
 		/*MessageService messageService = (MessageService) ctx.getBean("messageService");
 		//MessageService messageService = (MessageService) ctx.getBean(MessageService.class);
 		messageService.sendMsg("hello");
@@ -19,5 +20,6 @@ public class XmlFileConfigTest {
 
 		ClientService clientService = (ClientService) ctx.getBean("clientService");
 		clientService.sayHello();
+
 	}
 }

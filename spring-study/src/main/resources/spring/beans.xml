@@ -3,5 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="clientService" class="com.runcode.springstudy.instantiation.ClientService" factory-method="createInstance"/>
+	<bean id="clientService" class="com.runcode.springstudy.instantiation.ClientService" init-method="createInstance" lazy-init="false" depends-on="messageService">
+	</bean>
+
+
+	<bean id="messageService" class="com.runcode.springstudy.service.impl.MessageServiceImpl" init-method="init">
+
+	</bean>
+
+	<bean id="myBeanPostProcessor" class="com.runcode.springstudy.processors.MyBeanPostProcessor"/>
+
 </beans>

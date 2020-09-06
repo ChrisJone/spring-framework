@@ -328,15 +328,15 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				// Create bean instance.
 				//doGetBean-4 再次从单例池获取
 				if (mbd.isSingleton()) {
-					sharedInstance = getSingleton(beanName, () -> {
-						try {
-							return createBean(beanName, mbd, args);
-						}
-						catch (BeansException ex) {
-							// Explicitly remove instance from singleton cache: It might have been put there
-							// eagerly by the creation process, to allow for circular reference resolution.
-							// Also remove any beans that received a temporary reference to the bean.
-							destroySingleton(beanName);
+								sharedInstance = getSingleton(beanName, () -> {
+									try {
+										return createBean(beanName, mbd, args);
+									}
+									catch (BeansException ex) {
+										// Explicitly remove instance from singleton cache: It might have been put there
+										// eagerly by the creation process, to allow for circular reference resolution.
+										// Also remove any beans that received a temporary reference to the bean.
+										destroySingleton(beanName);
 							throw ex;
 						}
 					});

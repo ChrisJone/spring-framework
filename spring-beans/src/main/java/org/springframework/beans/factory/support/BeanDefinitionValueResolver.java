@@ -303,6 +303,7 @@ class BeanDefinitionValueResolver {
 		try {
 			Object bean;
 			Class<?> beanType = ref.getBeanType();
+			//如果ref在双亲的IOC容器中，则到双亲的IOC中获取
 			if (ref.isToParent()) {
 				BeanFactory parent = this.beanFactory.getParentBeanFactory();
 				if (parent == null) {
@@ -311,6 +312,7 @@ class BeanDefinitionValueResolver {
 							"Cannot resolve reference to bean " + ref +
 									" in parent factory: no parent factory available");
 				}
+				//触发GetBean()，进行依赖注入
 				if (beanType != null) {
 					bean = parent.getBean(beanType);
 				}

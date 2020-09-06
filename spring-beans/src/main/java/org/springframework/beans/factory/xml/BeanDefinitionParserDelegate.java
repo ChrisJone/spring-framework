@@ -516,8 +516,9 @@ public class BeanDefinitionParserDelegate {
 
 			parseBeanDefinitionAttributes(ele, beanName, containingBean, bd);
 			bd.setDescription(DomUtils.getChildElementValueByTagName(ele, DESCRIPTION_ELEMENT));
-
+			//解析bean属性，并将属性相关的值初始化到bd当中，为后续容器注入准备
 			parseMetaElements(ele, bd);
+
 			parseLookupOverrideSubElements(ele, bd.getMethodOverrides());
 			parseReplacedMethodSubElements(ele, bd.getMethodOverrides());
 
