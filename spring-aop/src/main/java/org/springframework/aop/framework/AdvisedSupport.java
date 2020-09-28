@@ -356,7 +356,7 @@ public class AdvisedSupport extends ProxyConfig implements Advised {
 	private void addAdvisorInternal(int pos, Advisor advisor) throws AopConfigException {
 		Assert.notNull(advisor, "Advisor must not be null");
 		if (isFrozen()) {
-			throw new AopConfigException("Cannot add advisor: Configuration is frozen.");
+			throw new AopConfigException("Cannot add advisor: Configouratin is frozen.");
 		}
 		if (pos > this.advisors.size()) {
 			throw new IllegalArgumentException(

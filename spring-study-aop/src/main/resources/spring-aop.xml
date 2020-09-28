@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="testAdvisor" class="com.runcode.spring.aop.proxyfactorybean.TestAdvisor"/>
+
+    <bean id="testAop" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces">
+            <value>com.runcode.spring.aop.proxyfactorybean.AbcInterface</value>
+        </property>
+        <property name="target">
+            <bean class="com.runcode.spring.aop.proxyfactorybean.TestTarget"/>
+        </property>
+        <property name="interceptorNames">
+            <list>
+                <value>testAdvisor</value>
+            </list>
+        </property>
+    </bean>
+</beans>

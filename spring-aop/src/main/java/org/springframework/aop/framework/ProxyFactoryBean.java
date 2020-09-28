@@ -247,6 +247,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	@Override
 	@Nullable
 	public Object getObject() throws BeansException {
+		//初始化通知链
 		initializeAdvisorChain();
 		if (isSingleton()) {
 			return getSingletonInstance();
@@ -365,6 +366,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	 * @param aopProxy the prepared AopProxy instance to get the proxy from
 	 * @return the proxy object to expose
 	 * @see AopProxy#getProxy(ClassLoader)
+	 *
 	 */
 	protected Object getProxy(AopProxy aopProxy) {
 		return aopProxy.getProxy(this.proxyClassLoader);
@@ -419,6 +421,8 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 	 * from a BeanFactory will be refreshed each time a new prototype instance
 	 * is added. Interceptors added programmatically through the factory API
 	 * are unaffected by such changes.
+	 * 1、加锁处理，防止对通知器链重复调用
+	 * 2、
 	 */
 	private synchronized void initializeAdvisorChain() throws AopConfigException, BeansException {
 		if (this.advisorChainInitialized) {
@@ -432,6 +436,8 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 			}
 
 			// Globals can't be last unless we specified a targetSource using the property...
+			// 自定义通知器不能在全局Globals之前，也就是global*
+			// https://docs.spring.io/spring-framework/docs/current/spring-framework-reference/core.html#aop-global-advisors
 			if (this.interceptorNames[this.interceptorNames.length - 1].endsWith(GLOBAL_SUFFIX) &&
 					this.targetName == null && this.targetSource == EMPTY_TARGET_SOURCE) {
 				throw new AopConfigException("Target required after globals");
@@ -439,6 +445,7 @@ public class ProxyFactoryBean extends ProxyCreatorSupport
 
 			// Materialize interceptor chain from bean names.
 			for (String name : this.interceptorNames) {
+				//如果以global*结尾的list bean，则bean工厂需要是ListableBeanFactory来将所以interceptors的Bean加入到通知链中
 				if (name.endsWith(GLOBAL_SUFFIX)) {
 					if (!(this.beanFactory instanceof ListableBeanFactory)) {
 						throw new AopConfigException(
